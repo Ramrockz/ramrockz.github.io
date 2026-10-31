@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rage Roomz – smash every room</title>
+<meta name="description" content="Rage Roomz is a free Android game: 15 rooms, 24 tools, and everything in them breaks. Smash, cut, flood and wreck it all, then rewind and do it again.">
+<meta property="og:title" content="Rage Roomz">
+<meta property="og:description" content="15 rooms. 24 tools. Smash it all. Free on Google Play.">
+<meta property="og:image" content="https://ramrockz.github.io/img/og.jpg">
+<meta property="og:url" content="https://ramrockz.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#231f1c">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Barlow+Semi+Condensed:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d1a17;
+    --ink-2: #2c2723;
+    --paper: #f6efe4;
+    --muted: #b9ad9c;
+    --hazard: #ffc21a;
+    --hot: #ff5a3c;
+    --scene: #231f1c;
+    --font-display: "Bowlby One", "Arial Black", Impact, sans-serif;
+    --font-ui: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+    --tape: repeating-linear-gradient(-45deg, var(--hazard) 0 14px, var(--ink) 14px 28px);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--scene); color: var(--paper); font: 500 19px/1.5 var(--font-ui); }
+  a { color: var(--hazard); }
+  img, video { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  .tape { height: 14px; background: var(--tape); }
+
+  header.top { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+  header.top img { width: 40px; height: 40px; border-radius: 10px; }
+  header.top span { font-family: var(--font-display); font-size: 20px; letter-spacing: .01em; }
+
+  .hero { display: grid; gap: 32px; align-items: center; padding: 24px 0 56px; }
+  @media (min-width: 880px) { .hero { grid-template-columns: 5fr 6fr; padding: 40px 0 72px; } }
+  h1 { font-family: var(--font-display); font-weight: 400; color: var(--hazard); font-size: clamp(48px, 10vw, 92px); line-height: .95; margin: 0 0 16px; text-shadow: 0 5px 0 var(--ink); }
+  .lead { font-family: var(--font-display); font-size: clamp(22px, 3.6vw, 32px); line-height: 1.15; margin: 0 0 18px; }
+  .lead b { color: var(--hazard); font-weight: 400; }
+  .hero p.sub { color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .play { display: inline-flex; align-items: center; gap: 12px; background: var(--hazard); color: var(--ink); text-decoration: none; font-family: var(--font-display); font-size: 21px; padding: 14px 24px 14px 20px; border-radius: 8px; box-shadow: 0 6px 0 var(--ink); transform: rotate(-2deg); transition: transform .12s, box-shadow .12s; }
+  .play:hover { transform: rotate(-2deg) translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
+  .play:active { transform: rotate(-2deg) translateY(4px); box-shadow: 0 2px 0 var(--ink); }
+  .play svg { width: 26px; height: 26px; flex: none; }
+  .play small { display: block; font: 700 13px/1 var(--font-ui); text-transform: uppercase; letter-spacing: .08em; }
+  .free { margin: 18px 0 0; font-size: 16px; color: var(--muted); }
+
+  .screen { position: relative; border-radius: 14px; overflow: hidden; background: var(--ink); box-shadow: 0 0 0 4px var(--ink), 0 24px 60px rgba(0,0,0,.5); transform: rotate(1.2deg); }
+  .screen video { width: 100%; aspect-ratio: 32 / 15; object-fit: cover; }
+
+  section { padding: 56px 0; }
+  h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1; margin: 0 0 8px; }
+  h2 + p { color: var(--muted); margin: 0 0 28px; max-width: 38em; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .tools li { background: var(--ink-2); border: 2px solid #3a332d; border-radius: 999px; padding: 6px 16px; font-weight: 700; font-size: 18px; }
+  .tools li.big { background: var(--hazard); border-color: var(--hazard); color: var(--ink); }
+
+  .rooms { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .rooms figure { margin: 0; position: relative; border-radius: 10px; overflow: hidden; background: var(--ink); }
+  .rooms img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .rooms figcaption { position: absolute; left: 10px; bottom: 10px; background: var(--ink); padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 16px; }
+  .more { margin: 18px 0 0; color: var(--muted); }
+
+  .points { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .point { background: var(--ink-2); border-radius: 12px; padding: 22px; }
+  .point h3 { font-family: var(--font-display); font-weight: 400; color: var(--hazard); font-size: 22px; margin: 0 0 6px; line-height: 1.1; }
+  .point p { margin: 0; color: var(--muted); font-size: 18px; }
+
+  .cta { text-align: center; padding: 64px 0 72px; }
+  .cta h2 { margin-bottom: 24px; }
+
+  footer { background: var(--ink); color: var(--muted); font-size: 16px; padding: 32px 0 40px; }
+  footer p { margin: 0 0 6px; }
+  footer .small { margin-top: 24px; font-size: 14px; }
+
+  @media (prefers-reduced-motion: reduce) { .play, .screen { transform: none; transition: none; } }
+</style>
+</head>
+<body>
+<div class="tape"></div>
+<div class="wrap">
+  <header class="top">
+    <img src="img/icon-192.png" alt="" width="40" height="40">
+    <span>Rage Roomz</span>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Rage<br>Roomz</h1>
+      <p class="lead"><b>15</b> rooms. <b>24</b> tools.<br>Smash it all.</p>
+      <p class="sub">Every wall, tile, shelf and cup is real physics, and every one of them breaks. Swing, cut, flood and wreck your way through a room, then rewind it whole and do it again.</p>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.ramrockz.smash">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+        <span><small>Get it on</small>Google Play</span>
+      </a>
+      <p class="free">Free for Android.</p>
+    </div>
+    <div class="screen">
+      <video src="img/trailer.mp4" poster="img/trailer.webp" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: a stampede tears through a bathroom"></video>
+    </div>
+  </div>
+</div>
+<div class="tape"></div>
+
+<section>
+  <div class="wrap">
+    <h2>Pick your weapon</h2>
+    <p>Small and careful or loud and huge: every tool breaks things its own way.</p>
+    <ul class="tools">
+      <li>Hammer</li><li>Katana</li><li>Axe</li><li>Crowbar</li><li>Concrete cutter</li><li>Water jet</li><li>Demolition hammer</li><li>Plunger</li><li>Magnet</li><li>Laser</li><li>Anti-gravity gun</li><li>Vines</li><li>Curse</li><li>Bouncy ball</li>
+      <li class="big">Wrecking ball</li><li class="big">Cannon</li><li class="big">Earthquake</li><li class="big">Tornado</li><li class="big">Stampede</li><li class="big">Monkeys</li><li class="big">Toddler</li><li class="big">Excavator</li><li class="big">Black hole</li>
+      <li>…and your bare hands</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <h2>Rooms to wreck</h2>
+    <p>From a tiled bathroom to a pharaoh's tomb, every room is built to be taken apart.</p>
+    <div class="rooms">
+      <figure><img src="img/bathroom-ball.webp" alt="A bathroom hit by the wrecking ball" loading="lazy" width="960" height="540"><figcaption>Bathroom</figcaption></figure>
+      <figure><img src="img/kitchen-jackhammer.webp" alt="A kitchen broken up by the demolition hammer" loading="lazy" width="960" height="540"><figcaption>Kitchen</figcaption></figure>
+      <figure><img src="img/china-ball.webp" alt="A china shop hit by the wrecking ball" loading="lazy" width="960" height="540"><figcaption>China shop</figcaption></figure>
+      <figure><img src="img/datacenter-hammer.webp" alt="An AI data center under the hammer" loading="lazy" width="960" height="540"><figcaption>AI data center</figcaption></figure>
+      <figure><img src="img/factory-ball.webp" alt="A robot factory hit by the wrecking ball" loading="lazy" width="960" height="540"><figcaption>Robot factory</figcaption></figure>
+      <figure><img src="img/vault-ball.webp" alt="A treasure vault hit by the wrecking ball" loading="lazy" width="960" height="540"><figcaption>Treasure vault</figcaption></figure>
+      <figure><img src="img/tomb-hammer.webp" alt="A pharaoh's tomb under the hammer" loading="lazy" width="960" height="540"><figcaption>Pharaoh's tomb</figcaption></figure>
+      <figure><img src="img/greenhouse-ball.webp" alt="A greenhouse hit by the wrecking ball" loading="lazy" width="960" height="540"><figcaption>Greenhouse</figcaption></figure>
+    </div>
+    <p class="more">Also: kids' room, office, lab, classroom, dentist, crypt and supermarket.</p>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap points">
+    <div class="point"><h3>Everything breaks</h3><p>Walls, floors, fixtures and the smallest thing on a shelf. Nothing is just decoration.</p></div>
+    <div class="point"><h3>Nothing floats</h3><p>Cut what holds it up and it comes down, along with everything hanging on it.</p></div>
+    <div class="point"><h3>Rewind</h3><p>One tap plays it all back in reverse until the room is whole again.</p></div>
+    <div class="point"><h3>Win new tools</h3><p>Destroy a room and it hands you its own tool: a wrecking ball, a tornado, a stampede. Wreck them all for the black hole.</p></div>
+  </div>
+</section>
+
+<div class="tape"></div>
+<section class="cta">
+  <div class="wrap">
+    <h2>Go break something.</h2>
+    <a class="play" href="https://play.google.com/store/apps/details?id=com.ramrockz.smash">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+      <span><small>Get it on</small>Google Play</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Questions? <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a></p>
+    <p><a href="rage-roomz/privacy/">Privacy policy</a></p>
+    <p class="small">Google Play and the Google Play logo are trademarks of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>
