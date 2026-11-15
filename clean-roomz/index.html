@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clean Roomz – from grime to gleam</title>
+<meta name="description" content="Clean Roomz is a free Android game: scrub, sweep and sort run-down rooms till they shine. More than 40 tools, 12 places full of dirt, and Grandma for the big jobs.">
+<meta property="og:title" content="Clean Roomz">
+<meta property="og:description" content="Run-down rooms. 40+ tools. Make it all shine. Free on Google Play.">
+<meta property="og:image" content="https://ramrockz.github.io/clean-roomz/img/og.jpg">
+<meta property="og:url" content="https://ramrockz.github.io/clean-roomz/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f2e38">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --scene: #0f2e38;
+    --ink: #0b2530;
+    --ink-2: #163c48;
+    --line: #23525f;
+    --paper: #f0fbfc;
+    --muted: #93b7c0;
+    --accent: #4fe3d2;
+    --hot: #ff6f9f;
+    --gold: #ffcc4d;
+    --font-display: "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --font-ui: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--scene); color: var(--paper); font: 500 18px/1.55 var(--font-ui); overflow-x: hidden; }
+  a { color: var(--accent); }
+  img, video { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* a row of soap bubbles between the parts */
+  .suds { height: 18px; background:
+    radial-gradient(circle at 9px 9px, rgba(79,227,210,.55) 0 5px, transparent 6px) 0 0 / 34px 18px repeat-x,
+    radial-gradient(circle at 26px 11px, rgba(240,251,252,.35) 0 3px, transparent 4px) 0 0 / 34px 18px repeat-x; }
+
+  header.top { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+  header.top img { width: 40px; height: 40px; border-radius: 10px; }
+  header.top span { font-family: var(--font-display); font-weight: 700; font-size: 21px; }
+
+  .hero { display: grid; gap: 36px; align-items: center; padding: 20px 0 56px; }
+  @media (min-width: 880px) { .hero { grid-template-columns: 7fr 4fr; padding: 36px 0 72px; } }
+  h1 { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: clamp(52px, 10vw, 96px); line-height: .92; margin: 0 0 18px; text-shadow: 0 5px 0 var(--ink); }
+  .lead { font-family: var(--font-display); font-weight: 600; font-size: clamp(23px, 3.6vw, 32px); line-height: 1.2; margin: 0 0 18px; }
+  .lead b { color: var(--accent); font-weight: 700; }
+  .hero p.sub { color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .play { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: var(--ink); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 22px; padding: 13px 26px 13px 20px; border-radius: 999px; box-shadow: 0 6px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
+  .play:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
+  .play:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ink); }
+  .play svg { width: 26px; height: 26px; flex: none; }
+  .play small { display: block; font: 800 12px/1 var(--font-ui); text-transform: uppercase; letter-spacing: .08em; }
+  .free { margin: 18px 0 0; font-size: 16px; color: var(--muted); }
+
+  /* the game is played upright: the clip in a phone */
+  .phone { justify-self: center; width: min(320px, 78vw); padding: 10px; background: var(--ink); border-radius: 34px; box-shadow: 0 0 0 3px var(--line), 0 26px 60px rgba(0,0,0,.45); }
+  .phone video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 25px; background: var(--ink-2); }
+
+  section { padding: 56px 0; }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; margin: 0 0 8px; }
+  h2 + p { color: var(--muted); margin: 0 0 28px; max-width: 38em; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .tools li { background: var(--ink-2); border: 2px solid var(--line); border-radius: 999px; padding: 5px 16px; font-weight: 700; font-size: 17px; }
+  .tools li.big { background: var(--hot); border-color: var(--hot); color: var(--ink); }
+
+  .rooms { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .rooms figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--ink); }
+  .rooms img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .rooms figcaption { position: absolute; left: 10px; bottom: 10px; background: var(--ink); padding: 3px 12px; border-radius: 999px; font-weight: 800; font-size: 15px; }
+  .more { margin: 18px 0 0; color: var(--muted); }
+
+  .points { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .point { background: var(--ink-2); border-radius: 18px; padding: 22px; }
+  .point h3 { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 23px; margin: 0 0 6px; line-height: 1.1; }
+  .point p { margin: 0; color: var(--muted); font-size: 17px; }
+
+  .cta { text-align: center; padding: 64px 0 72px; }
+  .cta h2 { margin-bottom: 24px; }
+
+  footer { background: var(--ink); color: var(--muted); font-size: 16px; padding: 32px 0 40px; }
+  footer p { margin: 0 0 6px; }
+  footer .small { margin-top: 24px; font-size: 14px; }
+
+  @media (prefers-reduced-motion: reduce) { .play { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="img/icon-192.png" alt="" width="40" height="40">
+    <span>Clean Roomz</span>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Clean<br>Roomz</h1>
+      <p class="lead">Run-down rooms. <b>40+</b> tools.<br>Make it all shine.</p>
+      <p class="sub">Grimy tiles, mouldy walls, rubbish everywhere: these houses haven't seen a cloth in years. Wipe, sweep, mop and polish them clean, room by room, and watch the fresh surface come through under your finger.</p>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.ramrockz.clean">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+        <span><small>Get it on</small>Google Play</span>
+      </a>
+      <p class="free">Free to play.</p>
+    </div>
+    <div class="phone">
+      <video src="img/trailer.mp4" poster="img/trailer.webp" autoplay muted loop playsinline preload="metadata" aria-label="Gameplay: a dust devil whirls through a bathroom, then Grandma cleans a whole kitchen"></video>
+    </div>
+  </div>
+</div>
+<div class="suds"></div>
+
+<section>
+  <div class="wrap">
+    <h2>Pick your tool</h2>
+    <p>Slow and tidy or fast and wild: every job has more than one tool, and the super tools do a whole room at once.</p>
+    <ul class="tools">
+      <li>Cloth</li><li>Sponge</li><li>Spray bottle</li><li>Feather duster</li><li>Squeegee</li><li>Steam cleaner</li><li>Broom</li><li>Mop</li><li>Floor polisher</li><li>Wet vac</li><li>Robot vacuum</li><li>Toothbrush</li><li>Plunger</li><li>Drain snake</li><li>Scraper</li><li>Paint roller</li><li>Pressure washer</li><li>Lawn mower</li><li>Hedge shears</li><li>Leaf blower</li><li>Sandblaster</li>
+      <li class="big">Magic wand</li><li class="big">Dust devil</li><li class="big">Foam wave</li><li class="big">Paint bomb</li><li class="big">Fizz tablets</li><li class="big">Golden plunger</li><li class="big">Treasure finder</li><li class="big">Master key</li><li class="big">Grandma</li>
+      <li>…and your bare hands</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <h2>Houses full of dirt</h2>
+    <p>Every room comes run down, partied in or hoarded, and new rooms open as you clean.</p>
+    <div class="rooms">
+      <figure><img src="img/bathroom-sponge.webp" alt="A grimy bathroom, half of it wiped clean with a sponge" loading="lazy" width="960" height="540"><figcaption>Bathroom</figcaption></figure>
+      <figure><img src="img/kitchen-steam.webp" alt="A greasy kitchen, half of it steamed clean" loading="lazy" width="960" height="540"><figcaption>Kitchen</figcaption></figure>
+      <figure><img src="img/living-broom.webp" alt="A messy living room being swept" loading="lazy" width="960" height="540"><figcaption>Living room</figcaption></figure>
+      <figure><img src="img/kids-rag.webp" alt="A kids' room being wiped with a cloth" loading="lazy" width="960" height="540"><figcaption>Kids' room</figcaption></figure>
+      <figure><img src="img/garden-mower.webp" alt="An overgrown garden being mowed" loading="lazy" width="960" height="540"><figcaption>Garden</figcaption></figure>
+      <figure><img src="img/poolhall-polisher.webp" alt="An indoor pool hall being polished" loading="lazy" width="960" height="540"><figcaption>Indoor pool</figcaption></figure>
+      <figure><img src="img/greenhouse-squeegee.webp" alt="A greenhouse's glass being squeegeed" loading="lazy" width="960" height="540"><figcaption>Greenhouse</figcaption></figure>
+      <figure><img src="img/supermarket-mop.webp" alt="A supermarket floor being mopped" loading="lazy" width="960" height="540"><figcaption>Supermarket</figcaption></figure>
+    </div>
+    <p class="more">Also: a flat share after the party, a hoarder's flat, a school, a china shop, a robot factory, a pyramid, a treasure vault and more.</p>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap points">
+    <div class="point"><h3>Watch it come clean</h3><p>Every wipe takes the grime off where your finger goes: dust, grease, mould and limescale, each with the tool it likes best.</p></div>
+    <div class="point"><h3>Fix it up</h3><p>Unblock the drains, strip the old wallpaper, fill the holes and paint the walls fresh.</p></div>
+    <div class="point"><h3>Finds under the rubbish</h3><p>Bin the junk and you might find treasure: sell it for coins or keep it in your collection.</p></div>
+    <div class="point"><h3>No timer, no stress</h3><p>Your houses stay just as you left them. Clean a little or a lot, whenever you like.</p></div>
+  </div>
+</section>
+
+<div class="suds"></div>
+<section class="cta">
+  <div class="wrap">
+    <h2>Grab a bucket.</h2>
+    <a class="play" href="https://play.google.com/store/apps/details?id=com.ramrockz.clean">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+      <span><small>Get it on</small>Google Play</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Questions? <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a></p>
+    <p><a href="privacy/">Privacy policy</a> · <a href="../">Our other game: Rage Roomz</a></p>
+    <p class="small">Google Play and the Google Play logo are trademarks of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>
