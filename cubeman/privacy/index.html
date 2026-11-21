@@ -26,27 +26,12 @@
 <body>
 <main>
 <h1>Cubeman Chronicles – Privacy Policy</h1>
-<p class="meta">Last updated: 19 November 2026</p>
+<p class="meta">Last updated: 21 November 2026</p>
 <p class="lang"><a href="../">← Cubeman Chronicles</a> <a href="#en">English</a> <a href="#de">Deutsch</a></p>
-
-<!--
-  WHEN ADS COME (planned: an interstitial only when the player picks a new character, at most every 3 minutes, see ads.ts;
-  probably Google AdMob via react-native-google-mobile-ads):
-  - add a section "Advertising (Google AdMob)" like section 4 of the Rage Roomz policy
-    (advertising ID, IP address, device info, ad interactions, SDK diagnostics; Google's consent
-    form / UMP in the EU, EEA, UK and Switzerland; how to change consent in the app; transfer to
-    Google LLC under the EU-U.S. Data Privacy Framework; links to Google's policies),
-  - if the app is set up as child-directed / for families: say so, and that only
-    non-personalised, family-safe ads are shown,
-  - remove "We don't show ads" from "What we don't do" and update section 2 and the German text,
-  - add an in-app purchase section if a "No ads" purchase is added,
-  - update the Play Console Data safety form at the same time.
--->
 
 <section id="en">
 <h2>English</h2>
-<p>This privacy policy explains what happens to your data when you use the Android game <strong>Cubeman Chronicles</strong>, hereinafter "the app".</p>
-<!-- TODO(check): add the package name once it is set (app.json has no android.package yet), e.g. "(package name <code>com.ramrockz.…</code>)", as on the Rage Roomz page. -->
+<p>This privacy policy explains what happens to your data when you use the Android game <strong>Cubeman Chronicles</strong> (package name <code>com.ramrockz.cubeman</code>), hereinafter "the app".</p>
 
 <h3>1. Who is responsible</h3>
 <address>
@@ -56,46 +41,59 @@ Zülpicher Str. 135<br>
 Email: <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a>
 </address>
 
-<h3>2. No account, no servers, no internet needed</h3>
-<p>The app has no user accounts and does not send any data to servers we operate. The game itself is packed into the app and runs entirely on your device; it does not load anything from the internet. The app currently contains no advertising and no analytics or tracking services.</p>
+<h3>2. No account, no servers of our own</h3>
+<p>The app has no user accounts and does not send any data to servers we operate. The game itself is packed into the app and runs entirely on your device. Only the advertising described in section 6 connects to Google.</p>
 
 <h3>3. What is stored on your device</h3>
-<p>Your game progress (achievements, characters you have unlocked, the towers and settings you chose, such as the cube look and graphics options) is stored only on your device, in the app's own storage. It is never sent to us and is deleted when you uninstall the app or clear its data. You can also reset your achievements in the app.</p>
-<!-- TODO(check): the app's settings screen with "Reset achievements" is currently hidden in the menu (#menu-settings). Keep or drop the last sentence accordingly. -->
+<p>Your game progress (achievements, characters you have unlocked, the towers and settings you chose, such as the cube look, sound and graphics options) is stored only on your device, in the app's own storage. It is never sent to us and is deleted when you uninstall the app or clear its data.</p>
 
 <h3>4. Your photo on the cubes</h3>
 <p>If you want, you can put a photo of your own on the tower's cubes: either take one with the camera or choose one from your photos. Only for this does the app ask for access to the camera; choosing a photo uses Android's photo picker, so you only share the one picture you select. The app makes the photo small and keeps it only on your device, so it can be shown on the cubes again next time. It is not uploaded or sent anywhere. You can delete it in the app at any time; it is also removed when you uninstall the app or clear its data. You can withdraw the camera permission in your Android settings at any time.</p>
-<!-- TODO(check): the exact Android permissions in the release build (expo-image-picker adds CAMERA; verify in the built AndroidManifest / Play Console that no storage or media permission is requested beyond that). -->
+<!-- TODO(check): the exact Android permissions in the release build (expo-image-picker adds CAMERA; storage permissions are blocked in app.json) -- verify in the Play Console's "App bundle explorer". -->
 
 <h3>5. Sharing clips</h3>
 <p>After a throw you can watch a slow-motion replay and share it as a video clip. The clip is made on your device. When you tap <em>Share</em>, the app hands it to Android's share sheet, and you choose where it goes (for example a messenger or a social network). We do not receive the clip. Whatever app you share it with handles it under its own terms and privacy policy.</p>
 
-<h3>6. What we don't do</h3>
+<h3>6. Advertising (Google AdMob)</h3>
+<p>The app is free and shows a full-screen ad now and then when you choose another character in the menu, at most every three minutes. These ads are provided by <strong>Google AdMob</strong> (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland). To show ads, measure them and prevent fraud, Google may collect and process:</p>
 <ul>
-  <li>We don't collect your name, email address, contacts, location or any other personal data.</li>
+  <li>your device's advertising ID (Android advertising ID),</li>
+  <li>your IP address and the approximate location derived from it,</li>
+  <li>device information (model, operating system, language, settings),</li>
+  <li>information about the ads shown and your interactions with them,</li>
+  <li>diagnostic and performance data of the ad SDK.</li>
+</ul>
+<p><strong>Consent:</strong> Where the law requires it (for example in the EU, EEA, UK and Switzerland), the app asks for your consent with Google's consent form before any ad is requested. Personalised ads are only shown if you consent (Art. 6(1)(a) GDPR). Without consent, Google may show non-personalised ads, which still use data such as your IP address for frequency capping, fraud prevention and measurement. You can change or withdraw your consent at any time via <em>Privacy options</em> in the app's main menu. You can also reset or delete your advertising ID in your Android settings.</p>
+<p>Data may be transferred to Google LLC in the USA; Google is certified under the EU-U.S. Data Privacy Framework. More information: <a href="https://policies.google.com/technologies/partner-sites">How Google uses information from apps that use its services</a>, <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
+
+<h3>7. What we don't do</h3>
+<ul>
+  <li>We don't collect your name, email address, contacts, files or precise location.</li>
   <li>We don't upload your photos or clips.</li>
-  <li>We don't use analytics or tracking, and we don't show ads.</li>
-  <li>We don't sell or share your data.</li>
+  <li>We don't use our own analytics or tracking.</li>
+  <li>We don't sell your data.</li>
 </ul>
 
-<h3>7. Children</h3>
-<p>The app does not collect personal data from anyone, including children.</p>
-<!-- TODO(check): decide the target audience for the Play Store listing. ads.ts mentions "child-directed settings" for the planned ads; if the game is aimed at children (Google Play Families policy, COPPA), this section needs to say so and the ad section later must cover it. Rage Roomz says "not directed at children under 13". -->
+<h3>8. Children</h3>
+<p>The app is not directed at children under 13. We do not knowingly collect personal data from children.</p>
+<!-- TODO(check): this must match the target audience chosen in the Play Console ("Target audience and content": 13+), as for Clean Roomz. -->
 
-<h3>8. Your rights</h3>
-<p>Under the GDPR you have the right to access, rectification, erasure, restriction of processing, data portability and to object to processing. As we do not receive or store any personal data from the app, there is usually nothing we hold about you; you can still contact us at any time. You also have the right to lodge a complaint with a data protection supervisory authority.</p>
+<h3>9. Your rights</h3>
+<p>Under the GDPR you have the right to access, rectification, erasure, restriction of processing, data portability and to object to processing, and the right to withdraw consent at any time with effect for the future. As we do not store any personal data ourselves, requests about advertising data are best directed to Google; you can still contact us at any time. You also have the right to lodge a complaint with a data protection supervisory authority.</p>
 
-<h3>9. Our videos on social media</h3>
-<p>We may publish gameplay clips of the app on our own channels, for example on YouTube and TikTok. The app itself does not use YouTube or TikTok. When you watch our videos there, the terms and privacy policies of those platforms apply (<a href="https://policies.google.com/privacy">Google / YouTube</a>, <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en">TikTok</a>).</p>
-<!-- TODO(check): if the Rage Roomz upload script (YouTube API Services / TikTok Content Posting API) is also used for Cubeman clips, copy sections 9 and 10 of the Rage Roomz privacy policy here instead of this short section. -->
+<h3>10. YouTube API Services</h3>
+<p>Videos of the game on our YouTube channel are uploaded by a script of ours that uses the <strong>YouTube API Services</strong>. It runs only on our own computer, signs in only to our own channel and does nothing but upload gameplay clips we made of the app. It does not read, store or share any data of YouTube users, and you never sign in to it; the app itself does not use the YouTube API Services. By watching our videos on YouTube you are bound by the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>; Google's handling of your data there is governed by the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. Access granted to an app through the YouTube API Services can be revoked at any time on <a href="https://security.google.com/settings/security/permissions">Google's security settings page</a>.</p>
 
-<h3>10. Changes</h3>
-<p>We will update this policy when the app changes, for example when ads are added. The current version is always available at this address.</p>
+<h3>11. TikTok</h3>
+<p>The same script also sends these clips to our own TikTok account as drafts, through TikTok's <strong>Content Posting API</strong> (TikTok Technology Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Ireland); we finish and post them in the TikTok app. It signs in only to our own account and reads no data of TikTok users. The app itself does not use TikTok. When you watch our videos on TikTok, the <a href="https://www.tiktok.com/legal/page/eea/terms-of-service/en">TikTok Terms of Service</a> and the <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en">TikTok Privacy Policy</a> apply.</p>
+
+<h3>12. Changes</h3>
+<p>We may update this policy when the app changes. The current version is always available at this address.</p>
 </section>
 
 <section id="de">
 <h2>Deutsch</h2>
-<p>Diese Datenschutzerklärung erklärt, was mit deinen Daten geschieht, wenn du das Android-Spiel <strong>Cubeman Chronicles</strong> nutzt, im Folgenden „die App“.</p>
+<p>Diese Datenschutzerklärung erklärt, was mit deinen Daten geschieht, wenn du das Android-Spiel <strong>Cubeman Chronicles</strong> (Paketname <code>com.ramrockz.cubeman</code>) nutzt, im Folgenden „die App“.</p>
 
 <h3>1. Verantwortlicher</h3>
 <address>
@@ -105,11 +103,11 @@ Zülpicher Str. 135<br>
 E-Mail: <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a>
 </address>
 
-<h3>2. Kein Konto, keine Server, kein Internet nötig</h3>
-<p>Die App hat keine Benutzerkonten und sendet keine Daten an von uns betriebene Server. Das Spiel selbst ist in der App enthalten und läuft vollständig auf deinem Gerät; es lädt nichts aus dem Internet. Die App enthält derzeit keine Werbung und keine Analyse- oder Tracking-Dienste.</p>
+<h3>2. Kein Konto, keine eigenen Server</h3>
+<p>Die App hat keine Benutzerkonten und sendet keine Daten an von uns betriebene Server. Das Spiel selbst ist in der App enthalten und läuft vollständig auf deinem Gerät. Nur die in Abschnitt 6 beschriebene Werbung verbindet sich mit Google.</p>
 
 <h3>3. Was auf deinem Gerät gespeichert wird</h3>
-<p>Dein Spielstand (Erfolge, freigeschaltete Figuren, die gewählten Türme und Einstellungen wie das Aussehen der Würfel und Grafikoptionen) wird nur auf deinem Gerät im Speicher der App abgelegt. Er wird nie an uns gesendet und beim Deinstallieren der App oder Löschen ihrer Daten entfernt. Deine Erfolge kannst du außerdem in der App zurücksetzen.</p>
+<p>Dein Spielstand (Erfolge, freigeschaltete Figuren, die gewählten Türme und Einstellungen wie das Aussehen der Würfel, Ton- und Grafikoptionen) wird nur auf deinem Gerät im Speicher der App abgelegt. Er wird nie an uns gesendet und beim Deinstallieren der App oder Löschen ihrer Daten entfernt.</p>
 
 <h3>4. Dein Foto auf den Würfeln</h3>
 <p>Wenn du möchtest, kannst du ein eigenes Foto auf die Würfel des Turms legen: Du nimmst eines mit der Kamera auf oder wählst eines aus deinen Fotos. Nur dafür fragt die App nach Zugriff auf die Kamera; für die Fotoauswahl nutzt sie die Fotoauswahl von Android, du gibst also nur das eine Bild frei, das du auswählst. Die App verkleinert das Foto und speichert es nur auf deinem Gerät, damit es beim nächsten Mal wieder auf den Würfeln erscheint. Es wird nicht hochgeladen oder verschickt. Du kannst es jederzeit in der App löschen; beim Deinstallieren der App oder Löschen ihrer Daten wird es ebenfalls entfernt. Die Kameraberechtigung kannst du jederzeit in den Android-Einstellungen widerrufen.</p>
@@ -117,25 +115,40 @@ E-Mail: <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a>
 <h3>5. Clips teilen</h3>
 <p>Nach einem Wurf kannst du eine Zeitlupen-Wiederholung ansehen und als Videoclip teilen. Der Clip entsteht auf deinem Gerät. Tippst du auf <em>Share</em>, übergibt die App ihn an das Teilen-Menü von Android, und du entscheidest, wohin er geht (z. B. ein Messenger oder ein soziales Netzwerk). Wir erhalten den Clip nicht. Die App, mit der du ihn teilst, verarbeitet ihn nach ihren eigenen Bedingungen und Datenschutzhinweisen.</p>
 
-<h3>6. Was wir nicht tun</h3>
+<h3>6. Werbung (Google AdMob)</h3>
+<p>Die App ist kostenlos und zeigt ab und zu eine Vollbild-Anzeige, wenn du im Menü eine andere Figur wählst, höchstens alle drei Minuten. Die Anzeigen stammen von <strong>Google AdMob</strong> (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Um Anzeigen auszuliefern, zu messen und Betrug zu verhindern, kann Google folgende Daten erheben und verarbeiten:</p>
 <ul>
-  <li>Wir erheben weder deinen Namen noch deine E-Mail-Adresse, Kontakte, deinen Standort oder andere personenbezogene Daten.</li>
+  <li>die Werbe-ID deines Geräts (Android-Werbe-ID),</li>
+  <li>deine IP-Adresse und den daraus abgeleiteten ungefähren Standort,</li>
+  <li>Geräteinformationen (Modell, Betriebssystem, Sprache, Einstellungen),</li>
+  <li>Angaben zu den gezeigten Anzeigen und deinen Interaktionen damit,</li>
+  <li>Diagnose- und Leistungsdaten des Werbe-SDK.</li>
+</ul>
+<p><strong>Einwilligung:</strong> Wo das Gesetz es verlangt (z. B. in der EU, im EWR, im Vereinigten Königreich und in der Schweiz), fragt die App über das Einwilligungsformular von Google nach deiner Einwilligung, bevor eine Anzeige angefordert wird. Personalisierte Anzeigen gibt es nur mit deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ohne Einwilligung kann Google nicht personalisierte Anzeigen zeigen, für die trotzdem Daten wie deine IP-Adresse zur Begrenzung der Anzeigenhäufigkeit, Betrugsvermeidung und Messung genutzt werden. Du kannst deine Einwilligung jederzeit über <em>Privacy options</em> im Hauptmenü der App ändern oder widerrufen. Deine Werbe-ID kannst du außerdem in den Android-Einstellungen zurücksetzen oder löschen.</p>
+<p>Daten können an Google LLC in den USA übermittelt werden; Google ist nach dem EU-US Data Privacy Framework zertifiziert. Mehr dazu: <a href="https://policies.google.com/technologies/partner-sites?hl=de">Wie Google Daten von Apps nutzt, die Google-Dienste verwenden</a>, <a href="https://policies.google.com/privacy?hl=de">Datenschutzerklärung von Google</a>.</p>
+
+<h3>7. Was wir nicht tun</h3>
+<ul>
+  <li>Wir erheben weder deinen Namen noch deine E-Mail-Adresse, Kontakte, Dateien oder deinen genauen Standort.</li>
   <li>Wir laden deine Fotos oder Clips nicht hoch.</li>
-  <li>Wir nutzen keine Analyse oder Nachverfolgung und zeigen keine Werbung.</li>
-  <li>Wir verkaufen oder teilen deine Daten nicht.</li>
+  <li>Wir nutzen keine eigene Analyse oder Nachverfolgung.</li>
+  <li>Wir verkaufen deine Daten nicht.</li>
 </ul>
 
-<h3>7. Kinder</h3>
-<p>Die App erhebt von niemandem personenbezogene Daten, auch nicht von Kindern.</p>
+<h3>8. Kinder</h3>
+<p>Die App richtet sich nicht an Kinder unter 13 Jahren. Wir erheben wissentlich keine personenbezogenen Daten von Kindern.</p>
 
-<h3>8. Deine Rechte</h3>
-<p>Nach der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Da wir aus der App keine personenbezogenen Daten erhalten oder speichern, liegen bei uns in der Regel keine Daten über dich vor; du kannst dich aber jederzeit an uns wenden. Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>
+<h3>9. Deine Rechte</h3>
+<p>Nach der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie das Recht, eine Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen. Da wir selbst keine personenbezogenen Daten speichern, richtest du Anfragen zu Werbedaten am besten an Google; du kannst dich aber jederzeit an uns wenden. Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>
 
-<h3>9. Unsere Videos in sozialen Medien</h3>
-<p>Wir veröffentlichen eventuell Gameplay-Clips der App auf unseren eigenen Kanälen, z. B. auf YouTube und TikTok. Die App selbst nutzt YouTube und TikTok nicht. Wenn du unsere Videos dort ansiehst, gelten die Bedingungen und Datenschutzhinweise dieser Plattformen (<a href="https://policies.google.com/privacy?hl=de">Google / YouTube</a>, <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/de">TikTok</a>).</p>
+<h3>10. YouTube-API-Dienste</h3>
+<p>Videos des Spiels auf unserem YouTube-Kanal lädt ein Skript von uns hoch, das die <strong>YouTube-API-Dienste</strong> (YouTube API Services) nutzt. Es läuft nur auf unserem eigenen Computer, meldet sich nur bei unserem eigenen Kanal an und lädt ausschließlich selbst erstellte Gameplay-Clips der App hoch. Es liest, speichert oder teilt keine Daten von YouTube-Nutzern, und du meldest dich nie dort an; die App selbst nutzt die YouTube-API-Dienste nicht. Wenn du unsere Videos auf YouTube ansiehst, gelten die <a href="https://www.youtube.com/t/terms">Nutzungsbedingungen von YouTube</a>; für Googles Umgang mit deinen Daten dort gilt die <a href="https://policies.google.com/privacy?hl=de">Datenschutzerklärung von Google</a>. Zugriff, den du einer Anwendung über die YouTube-API-Dienste gewährt hast, kannst du jederzeit auf der <a href="https://security.google.com/settings/security/permissions">Sicherheitsseite von Google</a> widerrufen.</p>
 
-<h3>10. Änderungen</h3>
-<p>Wir passen diese Erklärung an, wenn sich die App ändert, zum Beispiel wenn Werbung hinzukommt. Die aktuelle Fassung ist immer unter dieser Adresse abrufbar.</p>
+<h3>11. TikTok</h3>
+<p>Dasselbe Skript schickt diese Clips auch als Entwürfe an unser eigenes TikTok-Konto, über die <strong>Content Posting API</strong> von TikTok (TikTok Technology Limited, 10 Earlsfort Terrace, Dublin, D02 T380, Irland); wir stellen sie in der TikTok-App fertig und veröffentlichen sie dort. Es meldet sich nur bei unserem eigenen Konto an und liest keine Daten von TikTok-Nutzern. Die App selbst nutzt TikTok nicht. Wenn du unsere Videos auf TikTok ansiehst, gelten die <a href="https://www.tiktok.com/legal/page/eea/terms-of-service/de">Nutzungsbedingungen von TikTok</a> und die <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/de">Datenschutzerklärung von TikTok</a>.</p>
+
+<h3>12. Änderungen</h3>
+<p>Wir passen diese Erklärung an, wenn sich die App ändert. Die aktuelle Fassung ist immer unter dieser Adresse abrufbar.</p>
 </section>
 </main>
 </body>
