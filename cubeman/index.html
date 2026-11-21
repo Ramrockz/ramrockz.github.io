@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cubeman Chronicles – throw him at the tower</title>
+<meta name="description" content="Cubeman Chronicles is a physics game for Android: draw a flight path, let go, and Cubeman smashes into a tower of cubes. Dozens of characters with their own powers, models to wreck, achievements and slow-motion replays. Play for free on Google Play.">
+<link rel="canonical" href="https://ramrockz.github.io/cubeman/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cubeman Chronicles">
+<meta property="og:description" content="Draw a flight path, let go, and smash Cubeman into a tower of cubes. Play for free on Google Play.">
+<meta property="og:image" content="https://ramrockz.github.io/cubeman/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ramrockz.github.io/cubeman/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f3eef0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1d1018" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3eef0;
+    --card: #ffffff;
+    --ink: #5a3a48;
+    --muted: #8a6d7a;
+    --pink: #ff3380;
+    --pink-soft: #ffe3ee;
+    --line: #ead9e1;
+    --frame: #5a3a48;
+    --shadow: 0 10px 30px rgba(90, 58, 72, .16);
+    /* the rainbow tower's rows, bottom to top */
+    --c1: #f08a8f; --c2: #f6d27a; --c3: #a8dc8c; --c4: #86d3c8; --c5: #8fb6ea; --c6: #c39be8;
+    --font-display: "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --font-ui: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1d1018;
+      --card: #2b1a24;
+      --ink: #f7e8ef;
+      --muted: #c4a7b5;
+      --pink-soft: #45213a;
+      --line: #3d2633;
+      --frame: #0f080c;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 500 18px/1.55 var(--font-ui); overflow-x: hidden; }
+  a { color: var(--pink); font-weight: 700; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* a row of rainbow cubes, used as a divider */
+  .cubes { height: 14px; background: repeating-linear-gradient(90deg,
+      var(--c1) 0 28px, var(--c2) 28px 56px, var(--c3) 56px 84px, var(--c4) 84px 112px, var(--c5) 112px 140px, var(--c6) 140px 168px);
+    -webkit-mask: repeating-linear-gradient(90deg, #000 0 26px, transparent 26px 28px);
+            mask: repeating-linear-gradient(90deg, #000 0 26px, transparent 26px 28px); }
+
+  header.top { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+  header.top img { width: 40px; height: 40px; border-radius: 10px; box-shadow: 0 2px 6px rgba(90,58,72,.25); }
+  header.top span { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+
+  .hero { display: grid; gap: 36px; align-items: center; padding: 20px 0 56px; }
+  @media (min-width: 880px) { .hero { grid-template-columns: 7fr 5fr; padding: 40px 0 72px; } }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(56px, 13vw, 104px); line-height: .9; margin: 0 0 22px; letter-spacing: -.01em; }
+  h1 small { display: block; margin-top: 10px; font-size: clamp(17px, 3.6vw, 26px); letter-spacing: .42em; color: var(--pink); }
+  .lead { font-family: var(--font-display); font-weight: 600; font-size: clamp(23px, 4vw, 32px); line-height: 1.2; margin: 0 0 16px; max-width: 20em; }
+  .lead b { color: var(--pink); font-weight: 600; }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 32em; }
+
+  .soon { display: inline-flex; align-items: center; gap: 12px; background: var(--pink); color: #fff; text-decoration: none;
+    font-family: var(--font-display); font-weight: 600; font-size: 21px; line-height: 1.1; padding: 13px 26px 13px 20px; border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(255, 51, 128, .4); }
+  .soon svg { width: 26px; height: 26px; flex: none; }
+  .soon small { display: block; font: 800 12px/1.2 var(--font-ui); text-transform: uppercase; letter-spacing: .1em; opacity: .9; }
+  .note { margin: 16px 0 0; font-size: 16px; color: var(--muted); }
+
+  /* phone screenshots */
+  .phone { margin: 0; border-radius: 30px; overflow: hidden; background: var(--frame); border: 6px solid var(--frame); box-shadow: var(--shadow); }
+  .phone img { width: 100%; aspect-ratio: 540 / 1169; object-fit: cover; border-radius: 24px; }
+  .hero .phone { width: min(300px, 74vw); justify-self: center; transform: rotate(2deg); }
+
+  section { padding: 56px 0; }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 6vw, 46px); line-height: 1.05; margin: 0 0 10px; }
+  h2 + p { color: var(--muted); margin: 0 0 30px; max-width: 36em; }
+
+  .steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  .steps li { background: var(--card); border-radius: 20px; padding: 22px 22px 22px 76px; position: relative; box-shadow: var(--shadow); counter-increment: step; }
+  .steps li::before { content: counter(step); position: absolute; left: 20px; top: 20px; width: 40px; height: 40px; border-radius: 10px;
+    display: grid; place-items: center; font: 700 22px/1 var(--font-display); color: #fff; background: var(--pink); transform: rotate(-6deg); }
+  .steps li:nth-child(2)::before { background: #8f6fd8; transform: rotate(4deg); }
+  .steps li:nth-child(3)::before { background: #2fb7a6; transform: rotate(-3deg); }
+  .steps b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.15; margin-bottom: 4px; }
+  .steps span { color: var(--muted); font-size: 17px; }
+
+  .shots { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 720px) { .shots { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; } }
+  @media (min-width: 1000px) { .shots { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; } }
+  .shots figure { margin: 0; }
+  .shots .phone { border-radius: 24px; border-width: 5px; }
+  .shots .phone img { border-radius: 19px; }
+  .shots figcaption { margin: 10px 4px 0; font-weight: 800; font-size: 16px; line-height: 1.3; text-align: center; }
+
+  .points { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .point { background: var(--card); border-radius: 20px; padding: 22px; box-shadow: var(--shadow); }
+  .point h3 { font-family: var(--font-display); font-weight: 600; color: var(--pink); font-size: 23px; margin: 0 0 6px; line-height: 1.15; }
+  .point p { margin: 0; color: var(--muted); font-size: 17px; }
+
+  .chars { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .chars li { background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: 5px 14px; font-weight: 800; font-size: 16px; }
+  .chars li em { font-style: normal; color: var(--pink); font-weight: 700; }
+  .chars li.more { background: var(--pink-soft); border-color: transparent; }
+
+  .cta { text-align: center; padding: 64px 0 72px; }
+  .cta h2 { margin-bottom: 24px; }
+
+  footer { background: var(--card); color: var(--muted); font-size: 16px; padding: 32px 0 40px; }
+  footer p { margin: 0 0 6px; }
+  footer .small { margin-top: 22px; font-size: 14px; }
+
+  @media (prefers-reduced-motion: reduce) { .hero .phone { transform: none; } }
+</style>
+</head>
+<body>
+<div class="cubes"></div>
+<div class="wrap">
+  <header class="top">
+    <img src="img/icon-192.png" alt="" width="40" height="40">
+    <span>Cubeman Chronicles</span>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Cubeman<small>CHRONICLES</small></h1>
+      <p class="lead">Draw his flight path. Let go.<br><b>Watch the tower fall.</b></p>
+      <p class="sub">Cubeman is a crash-test hero made of blocks, and every cube in front of him is real physics. Throw him at towers and models, bring them down in one hit or bit by bit, and watch it all again in slow motion.</p>
+      <!-- PLACEHOLDER: no Play Store listing yet. When the game is live, turn this into a link like the one on the Rage Roomz page:
+           <a class="soon" href="https://play.google.com/store/apps/details?id=PACKAGE_NAME"> … <small>Get it on</small>Google Play</a>
+           (and the same for the button in the "cta" section further down). -->
+      <span class="soon" role="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+        <span><small>Play for free on</small>Google Play</span>
+      </span>
+      <p class="note">An Android game. Free to play.</p>
+      <!-- TODO(check): "Free to play" – ads are planned (only when choosing a new character, at most every 3 minutes); is there a paid "no ads" option planned like in Rage Roomz? -->
+    </div>
+    <figure class="phone">
+      <img src="img/impact.webp" alt="Cubeman crashes into a rainbow tower and cubes fly everywhere" width="540" height="1169">
+    </figure>
+  </div>
+</div>
+<div class="cubes"></div>
+
+<section>
+  <div class="wrap">
+    <h2>How it plays</h2>
+    <p>One finger, one throw, a few hundred cubes.</p>
+    <ol class="steps">
+      <li><b>Draw a flight path</b><span>Swipe the arc you want him to fly: flat and fast, or high and over the top.</span></li>
+      <li><b>Let go</b><span>Cubeman launches along your line. Draw it fast for a hard throw, slowly for a gentle one.</span></li>
+      <li><b>Smash</b><span>He slams into the tower and the cubes go flying. Count what's left, then throw again.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <h2>Pictures</h2>
+    <p>Straight from the game.</p>
+    <div class="shots">
+      <figure><div class="phone"><img src="img/ready.webp" alt="Cubeman as the hero, ready to be thrown at a rainbow tower" loading="lazy" width="540" height="1169"></div><figcaption>Ready to throw</figcaption></figure>
+      <figure><div class="phone"><img src="img/ship.webp" alt="The pirate's cannonball blowing up a ship made of cubes" loading="lazy" width="540" height="1169"></div><figcaption>Pirate vs. ship</figcaption></figure>
+      <figure><div class="phone"><img src="img/replay.webp" alt="Slow-motion replay of the dragon's fireball blowing up a tower" loading="lazy" width="540" height="1169"></div><figcaption>Slow-mo replay</figcaption></figure>
+      <figure><div class="phone"><img src="img/characters.webp" alt="The character screen with Crashtest, Alien, Astronaut, Bear, Cat and more" loading="lazy" width="540" height="1169"></div><figcaption>Characters with powers</figcaption></figure>
+      <figure><div class="phone"><img src="img/lighthouse.webp" alt="A lighthouse built of cubes in the builder" loading="lazy" width="540" height="1169"></div><figcaption>Models to wreck</figcaption></figure>
+      <figure><div class="phone"><img src="img/models.webp" alt="The model picker: tower, house, truck, ship, rocket, plane, train, windmill and more" loading="lazy" width="540" height="1169"></div><figcaption>Build your own</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap">
+    <h2>Pick your Cubeman</h2>
+    <p>Dozens of characters, each with a power of their own that changes how the tower comes down.</p>
+    <ul class="chars">
+      <li>Hero <em>Unstoppable</em></li><li>Dragon <em>Fireball</em></li><li>Wizard <em>Arcane Burst</em></li><li>Astronaut <em>Zero Gravity</em></li>
+      <li>Pirate <em>Cannonball</em></li><li>Ninja <em>Vanish</em></li><li>Viking <em>Thunder</em></li><li>Gorilla <em>Ground Pound</em></li>
+      <li>Cat <em>Nine Lives</em></li><li>Robot <em>Self-Destruct</em></li><li>Cyberpunk <em>Time Freeze</em></li><li>Alien <em>Abduction</em></li>
+      <li>Bear <em>Earthquake</em></li><li>Toddler <em>Tantrum</em></li><li>Vampire <em>Bat Swarm</em></li><li>Grandma <em>Knitted</em></li>
+      <li class="more">…and many more</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top: 0">
+  <div class="wrap points">
+    <!-- TODO(check): unlock rules – unlocks.ts has ALL_OPEN = true right now; the text below describes the planned rules (characters via achievements or hidden in a model's cube). -->
+    <div class="point"><h3>Towers and models</h3><p>Build your own tower, as tall and wide as you dare, or pick a model: a castle tower, a ship, a rocket, a lighthouse, a train, a piñata and more.</p></div>
+    <div class="point"><h3>Achievements</h3><p>Knock off just the top, land on the summit, fly clean over it. Dozens of challenges, and some characters are only won that way. Others hide inside a model's cubes.</p></div>
+    <div class="point"><h3>Slow-motion replays</h3><p>Every throw can be watched again in slow motion, from a camera that follows the crash. Like it? Share the clip.</p></div>
+    <div class="point"><h3>Your own cubes</h3><p>Rainbow, toy blocks, bricks, gold, neon, or a photo you take yourself, printed on every cube of the tower.</p></div>
+  </div>
+</section>
+
+<div class="cubes"></div>
+<section class="cta">
+  <div class="wrap">
+    <h2>Throw him. For free.</h2>
+    <!-- PLACEHOLDER: Play Store link goes here once the listing exists (see the comment in the hero). -->
+    <span class="soon" role="note">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.6 2.2a1.5 1.5 0 0 0-.6 1.2v17.2c0 .5.2.9.6 1.2l9.6-9.8-9.6-9.8Zm10.9 8.4 2.7-2.7-11-6.3a1.6 1.6 0 0 0-.8-.2l9.1 9.2Zm0 2.8-9.1 9.2c.3 0 .6-.1.8-.2l11-6.3-2.7-2.7Zm1.4-1.4 3 3 2.2-1.3c1-.6 1-2.1 0-2.7L19.9 9.7l-3 3Z"/></svg>
+      <span><small>Play for free on</small>Google Play</span>
+    </span>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Questions? <a href="mailto:fragen@kiwiundknoedel.de">fragen@kiwiundknoedel.de</a></p>
+    <p>Also by us: <a href="../">Rage Roomz</a></p>
+    <p><a href="privacy/">Privacy policy</a> · <a href="terms/">Terms of service</a></p>
+    <p class="small">Google Play and the Google Play logo are trademarks of Google LLC.</p>
+  </div>
+</footer>
+</body>
+</html>
