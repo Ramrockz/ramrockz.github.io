@@ -26,9 +26,6 @@
     --paper: #fff6fa;
     --muted: #c4a7b5;
     --accent: #ff3380;
-    --gold: #ffd23f;
-    /* the rainbow tower's rows */
-    --c1: #f08a8f; --c2: #f6d27a; --c3: #a8dc8c; --c4: #86d3c8; --c5: #8fb6ea; --c6: #c39be8;
     --font-display: "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
     --font-ui: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
     color-scheme: dark;
@@ -40,11 +37,8 @@
   img, video { display: block; max-width: 100%; height: auto; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
-  /* a row of rainbow cubes between the parts */
-  .cubes { height: 14px; background: repeating-linear-gradient(90deg,
-      var(--c1) 0 28px, var(--c2) 28px 56px, var(--c3) 56px 84px, var(--c4) 84px 112px, var(--c5) 112px 140px, var(--c6) 140px 168px);
-    -webkit-mask: repeating-linear-gradient(90deg, #000 0 26px, transparent 26px 28px);
-            mask: repeating-linear-gradient(90deg, #000 0 26px, transparent 26px 28px); }
+  /* a quiet row of little cubes between the parts */
+  .cubes { height: 10px; background: linear-gradient(90deg, rgba(255, 51, 128, .35) 0 10px, transparent 10px 26px) 0 0 / 26px 10px repeat-x; }
 
   header.top { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
   header.top img { width: 40px; height: 40px; border-radius: 10px; }
@@ -55,7 +49,7 @@
   h1 { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: clamp(52px, 10vw, 96px); line-height: .92; margin: 0 0 18px; text-shadow: 0 5px 0 var(--ink); }
   h1 small { display: block; margin-top: 10px; font-size: clamp(17px, 3.2vw, 26px); letter-spacing: .42em; color: var(--paper); text-shadow: none; }
   .lead { font-family: var(--font-display); font-weight: 600; font-size: clamp(23px, 3.6vw, 32px); line-height: 1.2; margin: 0 0 18px; }
-  .lead b { color: var(--gold); font-weight: 700; }
+  .lead b { color: var(--accent); font-weight: 700; }
   .hero p.sub { color: var(--muted); margin: 0 0 28px; max-width: 34em; }
   .play { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #fff; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.1; padding: 13px 26px 13px 20px; border-radius: 999px; box-shadow: 0 6px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
   a.play:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
@@ -74,13 +68,10 @@
 
   .chars { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
   .chars li { background: var(--ink-2); border: 2px solid var(--line); border-radius: 999px; padding: 5px 16px; font-weight: 700; font-size: 17px; }
-  .chars li em { font-style: normal; color: var(--gold); }
-  .chars li.big { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .chars li.big em { color: #fff; opacity: .85; }
+  .chars li em { font-style: normal; font-weight: 500; color: var(--muted); }
 
   .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  @media (min-width: 720px) { .shots { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  @media (min-width: 1000px) { .shots { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  @media (min-width: 720px) { .shots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
   .shots figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--ink); }
   .shots img { width: 100%; aspect-ratio: 540 / 1169; object-fit: cover; }
   .shots figcaption { position: absolute; left: 10px; bottom: 10px; right: 10px; width: fit-content; background: var(--ink); padding: 3px 12px; border-radius: 999px; font-weight: 800; font-size: 15px; }
@@ -135,7 +126,7 @@
     <h2>Pick your Cubeman</h2>
     <p>35+ characters, each with a power of their own that changes how the tower comes down.</p>
     <ul class="chars">
-      <li class="big">Dragon <em>Fireball</em></li><li class="big">Robot <em>Self-Destruct</em></li><li class="big">Pirate <em>Cannonball</em></li><li class="big">Viking <em>Thunder</em></li><li class="big">Bear <em>Earthquake</em></li>
+      <li>Dragon <em>Fireball</em></li><li>Robot <em>Self-Destruct</em></li><li>Pirate <em>Cannonball</em></li><li>Viking <em>Thunder</em></li><li>Bear <em>Earthquake</em></li>
       <li>Hero <em>Unstoppable</em></li><li>Wizard <em>Arcane Burst</em></li><li>Astronaut <em>Zero Gravity</em></li><li>Ninja <em>Vanish</em></li><li>Gorilla <em>Ground Pound</em></li>
       <li>Cat <em>Nine Lives</em></li><li>Cyberpunk <em>Time Freeze</em></li><li>Alien <em>Abduction</em></li><li>Cowboy <em>Lasso</em></li><li>Knight <em>Sword Slash</em></li>
       <li>Toddler <em>Tantrum</em></li><li>Vampire <em>Bat Swarm</em></li><li>Grandma <em>Knitted</em></li><li>Wrestler <em>Suplex</em></li><li>Clown <em>Bouncy</em></li>
@@ -154,8 +145,6 @@
       <figure><img src="img/ship.webp" alt="The pirate's cannonball blowing up a ship made of cubes" loading="lazy" width="540" height="1169"><figcaption>Ship</figcaption></figure>
       <figure><img src="img/lighthouse.webp" alt="A lighthouse built of cubes" loading="lazy" width="540" height="1169"><figcaption>Lighthouse</figcaption></figure>
       <figure><img src="img/replay.webp" alt="The dragon's fireball blowing up a tower" loading="lazy" width="540" height="1169"><figcaption>Fireball</figcaption></figure>
-      <figure><img src="img/characters.webp" alt="The character screen with Crashtest, Alien, Astronaut, Bear, Cat and more" loading="lazy" width="540" height="1169"><figcaption>Characters</figcaption></figure>
-      <figure><img src="img/models.webp" alt="The model picker: tower, house, truck, ship, rocket, plane, train, windmill and more" loading="lazy" width="540" height="1169"><figcaption>Models</figcaption></figure>
     </div>
     <p class="more">Also: a house, a truck, a rocket, a plane, a train, a windmill, a castle tower, a snowman, a piñata and more.</p>
   </div>
