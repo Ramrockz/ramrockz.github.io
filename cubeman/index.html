@@ -66,9 +66,13 @@
   h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 5vw, 44px); line-height: 1.05; margin: 0 0 8px; }
   h2 + p { color: var(--muted); margin: 0 0 28px; max-width: 38em; }
 
-  .chars { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
-  .chars li { background: var(--ink-2); border: 2px solid var(--line); border-radius: 999px; padding: 5px 16px; font-weight: 700; font-size: 17px; }
-  .chars li em { font-style: normal; font-weight: 500; color: var(--muted); }
+  /* the characters: face, name, power, what it does */
+  .chars { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); margin: 0; padding: 0; list-style: none; }
+  .chars li { display: flex; gap: 14px; align-items: flex-start; background: var(--ink-2); border-radius: 18px; padding: 16px; }
+  .chars img { width: 64px; height: 64px; flex: none; border-radius: 12px; image-rendering: pixelated; }
+  .chars b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 21px; line-height: 1.1; }
+  .chars span { display: block; color: var(--accent); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: .05em; margin: 2px 0 6px; }
+  .chars p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.45; }
 
   .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   @media (min-width: 720px) { .shots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; } }
@@ -124,15 +128,18 @@
 <section>
   <div class="wrap">
     <h2>Pick your Cubeman</h2>
-    <p>35+ characters, each with a power of their own that changes how the tower comes down.</p>
+    <p>Every character has a power of their own that changes how the tower comes down.</p>
     <ul class="chars">
-      <li>Dragon <em>Fireball</em></li><li>Robot <em>Self-Destruct</em></li><li>Pirate <em>Cannonball</em></li><li>Viking <em>Thunder</em></li><li>Bear <em>Earthquake</em></li>
-      <li>Hero <em>Unstoppable</em></li><li>Wizard <em>Arcane Burst</em></li><li>Astronaut <em>Zero Gravity</em></li><li>Ninja <em>Vanish</em></li><li>Gorilla <em>Ground Pound</em></li>
-      <li>Cat <em>Nine Lives</em></li><li>Cyberpunk <em>Time Freeze</em></li><li>Alien <em>Abduction</em></li><li>Cowboy <em>Lasso</em></li><li>Knight <em>Sword Slash</em></li>
-      <li>Toddler <em>Tantrum</em></li><li>Vampire <em>Bat Swarm</em></li><li>Grandma <em>Knitted</em></li><li>Wrestler <em>Suplex</em></li><li>Clown <em>Bouncy</em></li>
-      <li>Cow <em>Cow Tipping</em></li><li>Mermaid <em>Tail Slap</em></li><li>Tycoon <em>Gold Rush</em></li><li>Zombie <em>Sticky</em></li>
-      <li>…and more</li>
+      <li><img src="img/faces/dragon.webp" alt="" width="64" height="64" loading="lazy"><div><b>Dragon</b><span>Fireball</span><p>Explodes on impact and blasts the cubes away.</p></div></li>
+      <li><img src="img/faces/robot.webp" alt="" width="64" height="64" loading="lazy"><div><b>Robot</b><span>Self-Destruct</span><p>Once he lands he blinks red, then blows up, himself included.</p></div></li>
+      <li><img src="img/faces/wizard.webp" alt="" width="64" height="64" loading="lazy"><div><b>Wizard</b><span>Arcane Burst</span><p>Sucks the cubes in, then flings them sky-high.</p></div></li>
+      <li><img src="img/faces/astronaut.webp" alt="" width="64" height="64" loading="lazy"><div><b>Astronaut</b><span>Zero Gravity</span><p>Cubes he knocks loose float up and away.</p></div></li>
+      <li><img src="img/faces/cyberpunk.webp" alt="" width="64" height="64" loading="lazy"><div><b>Cyberpunk</b><span>Time Freeze</span><p>Just after impact time stands still: the cubes hang in mid-air until touched.</p></div></li>
+      <li><img src="img/faces/alien.webp" alt="" width="64" height="64" loading="lazy"><div><b>Alien</b><span>Abduction</span><p>A UFO beams up the cubes (and him) for a while, then drops it all.</p></div></li>
+      <li><img src="img/faces/grandma.webp" alt="" width="64" height="64" loading="lazy"><div><b>Grandma</b><span>Knitted</span><p>She knits the cubes together: the tower falls apart in big pieces.</p></div></li>
+      <li><img src="img/faces/viking.webp" alt="" width="64" height="64" loading="lazy"><div><b>Viking</b><span>Thunder</span><p>Lightning strikes the tower and splits it down the middle.</p></div></li>
     </ul>
+    <p class="more">…and 30 more: a pirate with a cannonball, a bear that shakes the ground, a clown that bounces, a cow that tips the tower over.</p>
   </div>
 </section>
 
